@@ -35,6 +35,7 @@ public class MainDialog extends JDialog {
         setSize(size_dim);
         setResizable(false);
         setLocationRelativeTo(null);
+        setType(Type.NORMAL);
 
         recieveButton.addActionListener(e -> recieveButton_click());
         connectButton.addActionListener(e -> connectButton_click());
@@ -42,7 +43,7 @@ public class MainDialog extends JDialog {
 
     private void recieveButton_click() {
         if (instance.server == null) {
-            instance.server = new Server();
+            instance.server = new Server(instance);
             serverStatusLabel.setText("Status: Ready");
             serverIPLabel.setText("Your IP: 127.0.0.1");
             recieveButton.setText("Disable");
@@ -62,7 +63,7 @@ public class MainDialog extends JDialog {
     private void connectButton_click() {
         if (instance.client == null) {
             try {
-                instance.client = new Client(connectionTextField.getText(), 4389);
+                instance.client = new Client(instance, connectionTextField.getText(), 4389);
             } catch (Exception e) {
                 instance.client = null;
                 JOptionPane.showMessageDialog(this, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);
