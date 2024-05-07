@@ -5,16 +5,17 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import remoteaccessapp.Instance;
 import remoteaccessapp.client.Client;
 import remoteaccessapp.server.Server;
-import remoteaccessapp.utils.ScreenRecorder;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MainDialog extends JDialog {
+public class MainFrame extends JFrame {
     private static Instance instance;
 
     private JButton recieveButton;
@@ -24,7 +25,7 @@ public class MainDialog extends JDialog {
     private JLabel serverIPLabel;
     private JLabel serverStatusLabel;
 
-    public MainDialog(Instance inst) {
+    public MainFrame(Instance inst) {
         instance = inst;
 
         setContentPane(rootPanel);
@@ -36,6 +37,14 @@ public class MainDialog extends JDialog {
         setResizable(false);
         setLocationRelativeTo(null);
         setType(Type.NORMAL);
+        setTitle("Remote Access App");
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
 
         recieveButton.addActionListener(e -> recieveButton_click());
         connectButton.addActionListener(e -> connectButton_click());
@@ -70,7 +79,7 @@ public class MainDialog extends JDialog {
             }
             if (instance.client != null) {
                 setVisible(false);
-                instance.clientDialog.startSession();
+                instance.clientFrame.startSession();
             }
         }
     }

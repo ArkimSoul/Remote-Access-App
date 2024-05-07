@@ -56,6 +56,14 @@ public class Client {
         }
     }
 
+    public void sendKeyMessage(KeyMessage keyMessage) {
+        try {
+            out.writeObject(keyMessage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean isConnected() {
         return socket.isConnected();
     }

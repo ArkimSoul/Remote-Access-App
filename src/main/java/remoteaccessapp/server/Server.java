@@ -1,6 +1,7 @@
 package remoteaccessapp.server;
 
 import remoteaccessapp.Instance;
+import remoteaccessapp.client.KeyMessage;
 import remoteaccessapp.client.MouseMessage;
 import remoteaccessapp.utils.ScreenRecorder;
 
@@ -64,18 +65,29 @@ public class Server {
         instance.executor.submit(() -> {
             try {
                 while (isClientConnected) {
-                    MouseMessage mouseMessage = (MouseMessage) in.readObject();
-                    System.out.println(mouseMessage.getX() + " " + mouseMessage.getY());
-
-                    robot.mouseMove(mouseMessage.getX(), mouseMessage.getY());
-                    instance.executor.submit(() -> {
-                        if (mouseMessage.isPressed()) {
-                            robot.mousePress(mouseMessage.getMouseButton());
-                        }
-                        else {
-                            robot.mouseRelease(mouseMessage.getMouseButton());
-                        }
-                    });
+                    Object message = in.readObject();
+                    if (message instanceof MouseMessage) {
+                        MouseMessage mouseMessage = (MouseMessage) message;
+                        robot.mouseMove(mouseMessage.getX(), mouseMessage.getY());
+                        instance.executor.submit(() -> {
+                            if (mouseMessage.isPressed()) {
+                                robot.mousePress(mouseMessage.getMouseButton());
+                            }
+                            else {
+                                robot.mouseRelease(mouseMessage.getMouseButton());
+                            }
+                        });
+                    } else if (message instanceof KeyMessage) {
+                        KeyMessage keyMessage = (KeyMessage) message;
+                        instance.executor.submit(() -> {
+                           if (keyMessage.isPressed()) {
+                               robot.keyPress(keyMessage.getKeyCode());
+                           }
+                           else {
+                               robot.keyRelease(keyMessage.getKeyCode());
+                           }
+                        });
+                    }
                 }
             }
             catch (Exception e) {

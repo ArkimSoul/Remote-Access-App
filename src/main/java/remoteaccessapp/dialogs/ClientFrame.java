@@ -4,15 +4,15 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import remoteaccessapp.Instance;
+import remoteaccessapp.client.KeyMessage;
 import remoteaccessapp.client.MouseMessage;
-import remoteaccessapp.utils.ScreenRecorder;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public class ClientDialog extends JDialog {
+public class ClientFrame extends JFrame {
     private static Instance instance;
     private JPanel contentPane;
     private JLabel screenLabel;
@@ -21,7 +21,7 @@ public class ClientDialog extends JDialog {
     private float x_mul = 0.0f;
     private float y_mul = 0.0f;
 
-    public ClientDialog(Instance inst) {
+    public ClientFrame(Instance inst) {
         instance = inst;
 
         setContentPane(contentPane);
@@ -32,12 +32,21 @@ public class ClientDialog extends JDialog {
         setSize(size_dim);
         setResizable(true);
         setLocationRelativeTo(null);
+        setTitle("Remote Access App");
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     public void startSession() {
         setVisible(true);
         new Thread(() -> {
             screenLabel.addMouseListener(screenMouseListener);
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
             while (instance.client.isConnected()) {
                 updateScreen();
             }
@@ -79,6 +88,14 @@ public class ClientDialog extends JDialog {
         @Override
         public void mouseReleased(MouseEvent e) {
             instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), e.getButton(), false));
+        }
+    };
+
+    private KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            instance.client.sendKeyMessage(new KeyMessage(e.getKeyCode(), e.getID() == KeyEvent.KEY_PRESSED));
+            return false;
         }
     };
 
