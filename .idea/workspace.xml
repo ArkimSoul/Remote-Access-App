@@ -9,12 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Переработка классов отвечающих за интерфейс программы">
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Additional.java" afterDir="false" />
+    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Corrections to classes responsible for transmitting mouse inputs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/MouseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/MouseMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/SoundMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Additional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Additional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/ScreenRecorder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715099972917</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Corrections to classes responsible for transmitting mouse inputs">
+      <option name="closed" value="true" />
+      <created>1715155087003</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715155087003</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,6 +164,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Исправлены ошибки серверной и клиентской части, добавлены оптимизационные поправки" />
     <MESSAGE value="Переработка классов отвечающих за интерфейс программы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Переработка классов отвечающих за интерфейс программы" />
+    <MESSAGE value="Corrections to classes responsible for transmitting mouse inputs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections to classes responsible for transmitting mouse inputs" />
   </component>
 </project>

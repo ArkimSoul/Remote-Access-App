@@ -1,9 +1,9 @@
 package remoteaccessapp;
 
 public class RemoteAccessApp {
-    private static Instance instance = new Instance();
+    private static final Instance instance = new Instance();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
     }
 

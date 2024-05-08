@@ -6,7 +6,6 @@ import remoteaccessapp.client.MouseMessage;
 import remoteaccessapp.utils.ScreenRecorder;
 
 import java.awt.*;
-import java.awt.event.InputEvent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -42,7 +41,7 @@ public class Server {
 
                 server_lifecycle();
             }
-            catch (Exception e) {
+            catch (Exception _) {
 
             }
         });
@@ -57,7 +56,7 @@ public class Server {
                     out.flush();
                 }
             }
-            catch (Exception e) {
+            catch (Exception _) {
 
             }
         });
@@ -92,7 +91,7 @@ public class Server {
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception _) {
 
             }
         });
@@ -104,7 +103,7 @@ public class Server {
             serverSocket.close();
             client_socket.close();
         }
-        catch (Exception e) {
+        catch (Exception _) {
 
         }
     }

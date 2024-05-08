@@ -1,10 +1,8 @@
 package remoteaccessapp.utils;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 public class ScreenRecorder {

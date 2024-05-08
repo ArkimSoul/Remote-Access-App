@@ -4,7 +4,6 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 
 public class Additional {
-
     public static int mouseKeyToInputKey(int mouseKey) {
         return switch (mouseKey) {
             case MouseEvent.BUTTON1 -> InputEvent.BUTTON1_DOWN_MASK;

@@ -19,7 +19,7 @@ public class Client {
     private static ObjectInputStream in;
     private static ObjectOutputStream out;
 
-    public static BufferedImage frame;
+    public static BufferedImage frameBuffer;
 
     public Client(Instance inst, String connection_ip, int connection_port) throws IOException {
         instance = inst;
@@ -36,14 +36,16 @@ public class Client {
 
     private void client_lifecycle() {
         instance.executor.submit(() -> {
-            while (true) {
-                try {
-                    FrameMessage frameMessage = (FrameMessage) in.readObject();
-                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(frameMessage.getImage());
-                    frame = ImageIO.read(byteArrayInputStream);
-                } catch (Exception e) {
-
+            try {
+                while (true) {
+                    Object message = in.readObject();
+                    if (message instanceof FrameMessage frameMessage) {
+                        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(frameMessage.getImage());
+                        frameBuffer = ImageIO.read(byteArrayInputStream);
+                    }
                 }
+            } catch (Exception _) {
+
             }
         });
     }
@@ -51,16 +53,16 @@ public class Client {
     public void sendMouseMessage(MouseMessage mouseMessage) {
         try {
             out.writeObject(mouseMessage);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException _) {
+
         }
     }
 
     public void sendKeyMessage(KeyMessage keyMessage) {
         try {
             out.writeObject(keyMessage);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException _) {
+
         }
     }
 

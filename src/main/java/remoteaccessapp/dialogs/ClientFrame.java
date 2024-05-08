@@ -53,7 +53,7 @@ public class ClientFrame extends JFrame {
 
     private void updateScreen() {
         try {
-            ImageIcon scaledFrame = scaleFrame(instance.client.frame);
+            ImageIcon scaledFrame = scaleFrame(instance.client.frameBuffer);
             screenLabel.setIcon(scaledFrame);
         } catch (NullPointerException e) {
 
