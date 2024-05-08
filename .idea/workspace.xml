@@ -10,9 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Переработка классов отвечающих за интерфейс программы">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Additional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/MouseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/MouseMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,21 +88,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RemoteAccessApp.executor": "Run",
-    "Gradle.Remote-Access-App [build].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Program Files/JetBrains/IntelliJ IDEA Community Edition 2024.1.1/plugins/uiDesigner",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propGUI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RemoteAccessApp.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Remote-Access-App [build].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/JetBrains/IntelliJ IDEA Community Edition 2024.1.1/plugins/uiDesigner&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -126,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715099172431</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Переработка классов отвечающих за интерфейс программы">
+      <option name="closed" value="true" />
+      <created>1715099972917</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715099972917</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

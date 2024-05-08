@@ -3,6 +3,7 @@ package remoteaccessapp.dialogs;
 import remoteaccessapp.Instance;
 import remoteaccessapp.client.KeyMessage;
 import remoteaccessapp.client.MouseMessage;
+import remoteaccessapp.utils.Additional;
 
 import javax.swing.*;
 import java.awt.*;
@@ -78,13 +79,17 @@ public class ClientFrame extends JFrame {
 
     private MouseListener screenMouseListener = new MouseAdapter() {
         @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            instance.client.sendMouseMessage(new MouseMessage(e.getWheelRotation(), true));
+        }
+        @Override
         public void mousePressed(MouseEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), e.getButton(), true));
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Additional.mouseKeyToInputKey(e.getButton()), true));
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), e.getButton(), false));
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Additional.mouseKeyToInputKey(e.getButton()), false));
         }
     };
 

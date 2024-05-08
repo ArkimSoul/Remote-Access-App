@@ -6,6 +6,7 @@ import remoteaccessapp.client.MouseMessage;
 import remoteaccessapp.utils.ScreenRecorder;
 
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -66,19 +67,20 @@ public class Server {
             try {
                 while (isClientConnected) {
                     Object message = in.readObject();
-                    if (message instanceof MouseMessage) {
-                        MouseMessage mouseMessage = (MouseMessage) message;
+                    if (message instanceof MouseMessage mouseMessage) {
                         robot.mouseMove(mouseMessage.getX(), mouseMessage.getY());
                         instance.executor.submit(() -> {
-                            if (mouseMessage.isPressed()) {
+                            if (mouseMessage.isWheel()) {
+                                robot.mouseWheel(mouseMessage.getWheelRotation());
+                            }
+                            else if (mouseMessage.isPressed()) {
                                 robot.mousePress(mouseMessage.getMouseButton());
                             }
                             else {
                                 robot.mouseRelease(mouseMessage.getMouseButton());
                             }
                         });
-                    } else if (message instanceof KeyMessage) {
-                        KeyMessage keyMessage = (KeyMessage) message;
+                    } else if (message instanceof KeyMessage keyMessage) {
                         instance.executor.submit(() -> {
                            if (keyMessage.isPressed()) {
                                robot.keyPress(keyMessage.getKeyCode());
