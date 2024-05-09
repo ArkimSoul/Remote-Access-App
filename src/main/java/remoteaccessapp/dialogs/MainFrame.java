@@ -1,6 +1,7 @@
 package remoteaccessapp.dialogs;
 
 import remoteaccessapp.Instance;
+import remoteaccessapp.RemoteAccessApp;
 import remoteaccessapp.client.Client;
 import remoteaccessapp.server.Server;
 
@@ -69,7 +70,7 @@ public class MainFrame extends JFrame {
     private void connectButton_click() {
         if (instance.client == null) {
             try {
-                instance.client = new Client(instance, connectionTextField.getText(), 4389);
+                instance.client = new Client(instance, connectionTextField.getText(), RemoteAccessApp.PORT);
             } catch (Exception e) {
                 instance.client = null;
                 JOptionPane.showMessageDialog(this, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);

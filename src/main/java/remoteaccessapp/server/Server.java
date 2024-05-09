@@ -1,6 +1,7 @@
 package remoteaccessapp.server;
 
 import remoteaccessapp.Instance;
+import remoteaccessapp.RemoteAccessApp;
 import remoteaccessapp.client.KeyMessage;
 import remoteaccessapp.client.MouseMessage;
 import remoteaccessapp.utils.ScreenRecorder;
@@ -13,7 +14,7 @@ import java.net.Socket;
 public class Server {
     private Instance instance;
 
-    private int port = 4389;
+    private int port = RemoteAccessApp.PORT;
     private ServerSocket serverSocket;
 
     private Socket client_socket;

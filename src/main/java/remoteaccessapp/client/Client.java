@@ -1,6 +1,7 @@
 package remoteaccessapp.client;
 
 import remoteaccessapp.Instance;
+import remoteaccessapp.RemoteAccessApp;
 import remoteaccessapp.server.FrameMessage;
 
 import javax.imageio.ImageIO;
@@ -12,7 +13,7 @@ public class Client {
     private Instance instance;
 
     private String serverIP = "localhost";
-    private int port = 4389;
+    private int port = RemoteAccessApp.PORT;
 
     private static Socket socket;
 

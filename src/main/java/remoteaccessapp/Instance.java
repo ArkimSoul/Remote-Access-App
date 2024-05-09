@@ -1,5 +1,6 @@
 package remoteaccessapp;
 
+import com.dosse.upnp.UPnP;
 import remoteaccessapp.dialogs.ClientFrame;
 import remoteaccessapp.dialogs.MainFrame;
 import remoteaccessapp.client.Client;
@@ -19,6 +20,16 @@ public class Instance {
 
     public Instance() {
         mainFrame.setVisible(true);
+
+        UPnP.openPortTCP(RemoteAccessApp.PORT);
+        UPnP.openPortUDP(RemoteAccessApp.PORT);
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                UPnP.closePortTCP(RemoteAccessApp.PORT);
+                UPnP.closePortUDP(RemoteAccessApp.PORT);
+            }
+        });
     }
 
 }
