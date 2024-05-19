@@ -42,4 +42,5 @@ For any inquiries or discussions related to the project, please contact the auth
   Telegram: @arkim01
 
 * **Mukatay Omar**\
+  Email: omarmukatay@gmail.com\
   Telegram: @omarmukatay
