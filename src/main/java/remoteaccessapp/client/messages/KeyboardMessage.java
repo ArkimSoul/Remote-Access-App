@@ -1,12 +1,12 @@
-package remoteaccessapp.client;
+package remoteaccessapp.client.messages;
 
 import java.io.Serializable;
 
-public class KeyMessage implements Serializable {
+public class KeyboardMessage implements Serializable {
     private int keyCode;
     private boolean isPressed;
 
-    public KeyMessage(int keyCode, boolean isPressed) {
+    public KeyboardMessage(int keyCode, boolean isPressed) {
         this.keyCode = keyCode;
         this.isPressed = isPressed;
     }

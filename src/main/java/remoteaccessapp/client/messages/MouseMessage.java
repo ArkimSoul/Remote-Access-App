@@ -1,4 +1,4 @@
-package remoteaccessapp.client;
+package remoteaccessapp.client.messages;
 
 import java.io.Serializable;
 

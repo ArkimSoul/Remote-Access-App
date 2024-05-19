@@ -1,9 +1,9 @@
 package remoteaccessapp.dialogs;
 
 import remoteaccessapp.Instance;
-import remoteaccessapp.client.KeyMessage;
-import remoteaccessapp.client.MouseMessage;
-import remoteaccessapp.utils.Additional;
+import remoteaccessapp.client.messages.KeyboardMessage;
+import remoteaccessapp.client.messages.MouseMessage;
+import remoteaccessapp.utils.Converter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +12,13 @@ import java.awt.image.BufferedImage;
 
 public class ClientFrame extends JFrame {
     private static Instance instance;
+
+    private final DefaultMenuBar defaultMenuBar;
+
     private JPanel contentPane;
     private JLabel screenLabel;
     private JPanel screenPanel;
+    private JLabel connectionStatusLabel;
 
     private float x_mul = 0.0f;
     private float y_mul = 0.0f;
@@ -23,6 +27,9 @@ public class ClientFrame extends JFrame {
         instance = inst;
 
         setContentPane(contentPane);
+
+        defaultMenuBar = new DefaultMenuBar(instance);
+        setJMenuBar(defaultMenuBar);
 
         Dimension size_dim = new Dimension(640, 480);
 
@@ -84,21 +91,26 @@ public class ClientFrame extends JFrame {
         }
         @Override
         public void mousePressed(MouseEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Additional.mouseKeyToInputKey(e.getButton()), true));
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Converter.mouseKeyToInputKey(e.getButton()), true));
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Additional.mouseKeyToInputKey(e.getButton()), false));
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Converter.mouseKeyToInputKey(e.getButton()), false));
         }
     };
 
     private KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
-            instance.client.sendKeyMessage(new KeyMessage(e.getKeyCode(), e.getID() == KeyEvent.KEY_PRESSED));
+            instance.client.sendKeyMessage(new KeyboardMessage(e.getKeyCode(), e.getID() == KeyEvent.KEY_PRESSED));
             return false;
         }
     };
 
+    public void updateLanguage() {
+        setTitle(instance.bundle.getString("cf.title"));
+        connectionStatusLabel.setText(instance.bundle.getString("cf.connected"));
+        defaultMenuBar.updateLanguage();
+    }
 }

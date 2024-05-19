@@ -2,8 +2,10 @@ package remoteaccessapp.server;
 
 import remoteaccessapp.Instance;
 import remoteaccessapp.RemoteAccessApp;
-import remoteaccessapp.client.KeyMessage;
-import remoteaccessapp.client.MouseMessage;
+import remoteaccessapp.client.messages.KeyboardMessage;
+import remoteaccessapp.client.messages.MouseMessage;
+import remoteaccessapp.server.messages.FrameMessage;
+import remoteaccessapp.server.messages.AESKeyMessage;
 import remoteaccessapp.utils.ScreenRecorder;
 
 import java.awt.*;
@@ -14,9 +16,11 @@ import java.net.Socket;
 public class Server {
     private Instance instance;
 
-    private int port = RemoteAccessApp.PORT;
-    private ServerSocket serverSocket;
+    private AESHelper aesHelper;
 
+    private int port = RemoteAccessApp.PORT;
+
+    private ServerSocket serverSocket;
     private Socket client_socket;
 
     private ObjectOutputStream out;
@@ -40,6 +44,11 @@ public class Server {
                 isClientConnected = true;
                 robot = new Robot();
 
+                aesHelper = new AESHelper();
+
+                out.writeObject(new AESKeyMessage(aesHelper.encodeKey()));
+                out.flush();
+
                 server_lifecycle();
             }
             catch (Exception _) {
@@ -53,7 +62,8 @@ public class Server {
         instance.executor.submit(() -> {
             try {
                 while (isClientConnected) {
-                    out.writeObject(new FrameMessage(ScreenRecorder.getByteFrame()));
+                    byte[] message = aesHelper.encrypt(ScreenRecorder.getByteFrame());
+                    out.writeObject(new FrameMessage(message));
                     out.flush();
                 }
             }
@@ -80,7 +90,7 @@ public class Server {
                                 robot.mouseRelease(mouseMessage.getMouseButton());
                             }
                         });
-                    } else if (message instanceof KeyMessage keyMessage) {
+                    } else if (message instanceof KeyboardMessage keyMessage) {
                         instance.executor.submit(() -> {
                            if (keyMessage.isPressed()) {
                                robot.keyPress(keyMessage.getKeyCode());
@@ -98,6 +108,10 @@ public class Server {
         });
     }
 
+    public String getIPAddress() {
+        return client_socket.getInetAddress().getHostAddress();
+    }
+
     public void close() {
         try {
             isClientConnected = false;
@@ -108,4 +122,5 @@ public class Server {
 
         }
     }
+
 }
