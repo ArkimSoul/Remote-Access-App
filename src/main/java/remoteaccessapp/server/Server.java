@@ -3,18 +3,30 @@ package remoteaccessapp.server;
 import remoteaccessapp.Instance;
 import remoteaccessapp.client.messages.KeyboardMessage;
 import remoteaccessapp.client.messages.MouseMessage;
+import remoteaccessapp.enums.MouseAction;
 import remoteaccessapp.server.messages.FrameMessage;
 import remoteaccessapp.server.messages.AESKeyMessage;
+import remoteaccessapp.server.messages.RSAKeyMessage;
+import remoteaccessapp.utils.Converter;
 import remoteaccessapp.utils.ScreenRecorder;
 
+import javax.crypto.NoSuchPaddingException;
 import java.awt.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 public class Server {
     private final Instance instance;
 
+    private boolean isRSAEnabled;
+    private boolean isAESEnabled;
+    private int aesKeyRenewalPeriod;
+
+    private RSAHelper rsaHelper;
     private AESHelper aesHelper;
 
     private volatile ServerSocket serverSocket;
@@ -30,6 +42,10 @@ public class Server {
     public Server(Instance inst) {
         instance = inst;
 
+        isRSAEnabled = instance.settings.isRSAEnabled();
+        isAESEnabled = instance.settings.isAESEnabled();
+        aesKeyRenewalPeriod = instance.settings.getAESKeyRenewalPeriod();
+
         instance.executor.submit(() -> {
             try {
                 serverSocket = new ServerSocket(instance.settings.getServerPort());
@@ -41,10 +57,20 @@ public class Server {
                 isClientConnected = true;
                 robot = new Robot();
 
-                aesHelper = new AESHelper();
+                if (isRSAEnabled) {
+                    rsaHelper = new RSAHelper();
+                    out.writeObject(new RSAKeyMessage(rsaHelper.encodePublicKey(), rsaHelper.encodePrivateKey()));
+                    out.flush();
 
-                out.writeObject(new AESKeyMessage(aesHelper.encodeKey()));
-                out.flush();
+                    out.writeObject(updateAESKey(true));
+                    out.flush();
+                    isAESEnabled = true;
+                }
+
+                if (isAESEnabled && !isRSAEnabled) {
+                    out.writeObject(updateAESKey(false));
+                    out.flush();
+                }
 
                 server_lifecycle();
             }
@@ -54,12 +80,21 @@ public class Server {
         });
     }
 
+    private AESKeyMessage updateAESKey(boolean returnRSAEncodedKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+        aesHelper = new AESHelper();
+        if (returnRSAEncodedKey) {
+            byte[] key = aesHelper.encodeKey();
+            return new AESKeyMessage(rsaHelper.encrypt(key));
+        }
+        return new AESKeyMessage(aesHelper.encodeKey());
+    }
+
     private void server_lifecycle() {
         /* OUTPUT THREAD */
         instance.executor.submit(() -> {
             try {
                 while (isClientConnected) {
-                    byte[] message = aesHelper.encrypt(ScreenRecorder.getByteFrame());
+                    byte[] message = (isAESEnabled ? aesHelper.encrypt(ScreenRecorder.getByteFrame()) : ScreenRecorder.getByteFrame());
                     out.writeObject(new FrameMessage(message));
                     out.flush();
                 }
@@ -75,25 +110,21 @@ public class Server {
                 while (isClientConnected) {
                     Object message = in.readObject();
                     if (message instanceof MouseMessage mouseMessage) {
-                        robot.mouseMove(mouseMessage.getX(), mouseMessage.getY());
+                        robot.mouseMove(mouseMessage.x(), mouseMessage.y());
                         instance.executor.submit(() -> {
-                            if (mouseMessage.isWheel()) {
-                                robot.mouseWheel(mouseMessage.getWheelRotation());
-                            }
-                            else if (mouseMessage.isPressed()) {
-                                robot.mousePress(mouseMessage.getMouseButton());
-                            }
-                            else {
-                                robot.mouseRelease(mouseMessage.getMouseButton());
+                            switch (mouseMessage.mouseAction()) {
+                                case PRESS -> robot.mousePress(mouseMessage.mouseButton());
+                                case RELEASE -> robot.mouseRelease(mouseMessage.mouseButton());
+                                case SCROLL -> robot.mouseWheel(mouseMessage.wheelRotation());
                             }
                         });
                     } else if (message instanceof KeyboardMessage keyMessage) {
                         instance.executor.submit(() -> {
                            if (keyMessage.isPressed()) {
-                               robot.keyPress(keyMessage.getKeyCode());
+                               robot.keyPress(keyMessage.keyCode());
                            }
                            else {
-                               robot.keyRelease(keyMessage.getKeyCode());
+                               robot.keyRelease(keyMessage.keyCode());
                            }
                         });
                     }

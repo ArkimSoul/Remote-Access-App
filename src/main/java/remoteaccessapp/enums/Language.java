@@ -1,4 +1,4 @@
-package remoteaccessapp.utils.enums;
+package remoteaccessapp.enums;
 
 public enum Language {
     ENGLISH ("English - English", "en_US"),

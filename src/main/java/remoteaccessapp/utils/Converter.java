@@ -2,6 +2,7 @@ package remoteaccessapp.utils;
 
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
+import java.util.Base64;
 
 public class Converter {
     public static int mouseKeyToInputKey(int mouseKey) {
@@ -13,10 +14,11 @@ public class Converter {
         };
     }
 
-    public static byte[] mergeBytes(byte[] bytes1, byte[] bytes2) {
-        byte[] bytes = new byte[bytes1.length + bytes2.length];
-        System.arraycopy(bytes1, 0, bytes, 0, bytes1.length);
-        System.arraycopy(bytes2, 0, bytes, bytes1.length, bytes2.length);
-        return bytes;
+    public static String bytesToString(byte[] bytes) {
+        return Base64.getEncoder().encodeToString(bytes);
+    }
+
+    public static byte[] stringToBytes(String string) {
+        return string.getBytes();
     }
 }

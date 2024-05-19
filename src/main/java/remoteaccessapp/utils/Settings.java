@@ -1,7 +1,7 @@
 package remoteaccessapp.utils;
 
 import remoteaccessapp.Instance;
-import remoteaccessapp.utils.enums.Language;
+import remoteaccessapp.enums.Language;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -98,6 +98,15 @@ public class Settings {
 
     public void setRSAEnabled(boolean rsaEnabled) {
         properties.setProperty("rsaEnabled", String.valueOf(rsaEnabled));
+        saveSettings();
+    }
+
+    public int getAESKeyRenewalPeriod() {
+        return Integer.parseInt(properties.getProperty("aesKeyRenewalPeriod", "180"));
+    }
+
+    public void setAESKeyRenewalPeriod(int i) {
+        properties.setProperty("aesKeyRenewalPeriod", String.valueOf(i));
         saveSettings();
     }
 }

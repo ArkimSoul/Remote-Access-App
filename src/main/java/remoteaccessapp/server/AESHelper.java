@@ -11,17 +11,18 @@ import java.util.Base64;
 
 public class AESHelper {
     private static SecretKey secretKey;
+
     private static Cipher encrypter;
     private static Cipher decrypter;
 
-    private static SecretKey generateKey() throws NoSuchAlgorithmException {
+    private void generateKey() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(128);
-        return keyGenerator.generateKey();
+        secretKey = keyGenerator.generateKey();
     }
 
     public AESHelper() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        secretKey = generateKey();
+        generateKey();
 
         encrypter = Cipher.getInstance("AES");
         encrypter.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -45,8 +46,8 @@ public class AESHelper {
         try {
             return encrypter.doFinal(bytes);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception _) {
+
         }
         return null;
     }
@@ -55,13 +56,13 @@ public class AESHelper {
         try {
             return decrypter.doFinal(bytes);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception _) {
+
         }
         return null;
     }
 
-    public String encodeKey() {
-        return Base64.getEncoder().encodeToString(secretKey.getEncoded());
+    public byte[] encodeKey() {
+        return secretKey.getEncoded();
     }
 }

@@ -3,6 +3,7 @@ package remoteaccessapp.dialogs;
 import remoteaccessapp.Instance;
 import remoteaccessapp.client.messages.KeyboardMessage;
 import remoteaccessapp.client.messages.MouseMessage;
+import remoteaccessapp.enums.MouseAction;
 import remoteaccessapp.utils.Converter;
 
 import javax.swing.*;
@@ -51,6 +52,8 @@ public class ClientFrame extends JFrame {
         setVisible(true);
         new Thread(() -> {
             screenLabel.addMouseListener(screenMouseListener);
+            screenLabel.addMouseMotionListener(screenMotionListener);
+            screenLabel.addMouseWheelListener(e -> instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), 0, e.getWheelRotation(), MouseAction.SCROLL)));
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
             while (instance.client.isConnected()) {
                 updateScreen();
@@ -62,7 +65,7 @@ public class ClientFrame extends JFrame {
         try {
             ImageIcon scaledFrame = scaleFrame(instance.client.frameBuffer);
             screenLabel.setIcon(scaledFrame);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException _) {
 
         }
     }
@@ -84,23 +87,26 @@ public class ClientFrame extends JFrame {
         return new ImageIcon(scaledImage);
     }
 
-    private MouseListener screenMouseListener = new MouseAdapter() {
+    private final MouseMotionListener screenMotionListener = new MouseMotionAdapter() {
         @Override
-        public void mouseWheelMoved(MouseWheelEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage(e.getWheelRotation(), true));
+        public void mouseMoved(MouseEvent e) {
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), 0, 0, MouseAction.MOVE));
         }
+    };
+
+    private final MouseListener screenMouseListener = new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Converter.mouseKeyToInputKey(e.getButton()), true));
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Converter.mouseKeyToInputKey(e.getButton()), 0, MouseAction.PRESS));
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Converter.mouseKeyToInputKey(e.getButton()), false));
+            instance.client.sendMouseMessage(new MouseMessage((int) (e.getX() * x_mul), (int) (e.getY() * y_mul), Converter.mouseKeyToInputKey(e.getButton()), 0, MouseAction.RELEASE));
         }
     };
 
-    private KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
+    private final KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
             instance.client.sendKeyMessage(new KeyboardMessage(e.getKeyCode(), e.getID() == KeyEvent.KEY_PRESSED));

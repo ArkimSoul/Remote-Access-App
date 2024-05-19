@@ -1,12 +1,14 @@
 package remoteaccessapp.client;
 
 import remoteaccessapp.Instance;
-import remoteaccessapp.RemoteAccessApp;
 import remoteaccessapp.client.messages.KeyboardMessage;
 import remoteaccessapp.client.messages.MouseMessage;
 import remoteaccessapp.server.AESHelper;
+import remoteaccessapp.server.RSAHelper;
 import remoteaccessapp.server.messages.FrameMessage;
 import remoteaccessapp.server.messages.AESKeyMessage;
+import remoteaccessapp.server.messages.RSAKeyMessage;
+import remoteaccessapp.utils.Converter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,19 +16,23 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    private Instance instance;
+    private final Instance instance;
+
+    private boolean isRSAEnabled = false;
+    private boolean isAESEnabled = false;
 
     private AESHelper aesHelper;
+    private RSAHelper rsaHelper;
 
-    private String serverIP = "localhost";
-    private int port = 4389;
+    private String serverIP;
+    private int port;
 
     private static Socket socket;
 
     private static ObjectInputStream in;
     private static ObjectOutputStream out;
 
-    public static BufferedImage frameBuffer;
+    public BufferedImage frameBuffer;
 
     public Client(Instance inst, String connection_ip, int connection_port) throws IOException {
         instance = inst;
@@ -39,8 +45,19 @@ public class Client {
         out = new ObjectOutputStream(socket.getOutputStream());
 
         try {
-            AESKeyMessage aesKeyMessage = (AESKeyMessage) in.readObject();
-            aesHelper = new AESHelper(aesKeyMessage.getKey());
+            Object object = in.readObject();
+            if (object instanceof RSAKeyMessage rsaKeyMessage) {
+                rsaHelper = new RSAHelper(rsaKeyMessage.publicKey(), rsaKeyMessage.privateKey());
+                isRSAEnabled = true;
+
+                AESKeyMessage aesKeyMessage = (AESKeyMessage) in.readObject();
+                aesHelper = new AESHelper(Converter.bytesToString(rsaHelper.decrypt(aesKeyMessage.key())));
+                isAESEnabled = true;
+            }
+            else if (object instanceof AESKeyMessage aesKeyMessage) {
+                aesHelper = new AESHelper(Converter.bytesToString(aesKeyMessage.key()));
+                isAESEnabled = true;
+            }
         }
         catch (Exception _) {
 
@@ -54,8 +71,7 @@ public class Client {
             try {
                 while (true) {
                     if (in.readObject() instanceof FrameMessage frameMessage) {
-                        byte[] message = frameMessage.getImage();
-                        message = aesHelper.decrypt(message);
+                        byte[] message = (isAESEnabled ? aesHelper.decrypt(frameMessage.image()) : frameMessage.image());
                         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(message);
                         frameBuffer = ImageIO.read(byteArrayInputStream);
                     }

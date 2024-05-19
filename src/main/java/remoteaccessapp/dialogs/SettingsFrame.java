@@ -1,7 +1,7 @@
 package remoteaccessapp.dialogs;
 
 import remoteaccessapp.Instance;
-import remoteaccessapp.utils.enums.Language;
+import remoteaccessapp.enums.Language;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +18,15 @@ public class SettingsFrame extends JFrame {
     private JLabel deviceNameLabel;
     private JLabel languageLabel;
     private JLabel serverPortLabel;
+    private JTextField a60TextField;
+    private JLabel aesRenewalLabel;
 
     public SettingsFrame(Instance inst) {
         instance = inst;
 
         setContentPane(contentPane);
 
-        Dimension size_dim = new Dimension(550, 220);
+        Dimension size_dim = new Dimension(550, 250);
 
         setPreferredSize(size_dim);
         setSize(size_dim);
@@ -39,6 +41,10 @@ public class SettingsFrame extends JFrame {
 
         saveButton.addActionListener(e -> saveButton_click());
 
+        enableAESEncryptionCheckBox.addChangeListener(e -> a60TextField.setEnabled(enableAESEncryptionCheckBox.isSelected()));
+
+        a60TextField.setEnabled(enableAESEncryptionCheckBox.isSelected());
+        a60TextField.setText(Integer.toString(instance.settings.getAESKeyRenewalPeriod()));
         deviceNameTextField.setText(instance.settings.getDeviceName());
         languageComboBox.setSelectedItem(instance.settings.getLanguage());
         serverPortTextField.setText(Integer.toString(instance.settings.getServerPort()));
@@ -52,6 +58,7 @@ public class SettingsFrame extends JFrame {
         instance.settings.setServerPort(Integer.parseInt(serverPortTextField.getText()));
         instance.settings.setAESEnabled(enableAESEncryptionCheckBox.isSelected());
         instance.settings.setRSAEnabled(enableRSAEncryptionCheckBox.isSelected());
+        instance.settings.setAESKeyRenewalPeriod(Integer.parseInt(a60TextField.getText()));
     }
 
     public void updateLanguage() {
@@ -61,6 +68,7 @@ public class SettingsFrame extends JFrame {
         serverPortLabel.setText(instance.bundle.getString("sf.server_port"));
         enableAESEncryptionCheckBox.setText(instance.bundle.getString("sf.enable_aes"));
         enableRSAEncryptionCheckBox.setText(instance.bundle.getString("sf.enable_rsa"));
+        aesRenewalLabel.setText(instance.bundle.getString("sf.aes_renewal"));
         saveButton.setText(instance.bundle.getString("sf.save"));
     }
 }

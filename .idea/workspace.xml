@@ -9,19 +9,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Added AES encryption, program settings, localization, minor design amendments">
+    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Bug fixes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/enums/MouseAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/RSAHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/RSAKeyMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/DefaultMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/DefaultMenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/KeyboardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/KeyboardMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/MouseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/MouseMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/AESKeyMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/AESKeyMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/FrameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/FrameMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Converter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/enums/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716077583943</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Bug fixes">
+      <option name="closed" value="true" />
+      <created>1716080012436</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1716080012436</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -205,6 +221,7 @@
     <MESSAGE value="Corrections and optimization of the client-server" />
     <MESSAGE value="UPnP protocol" />
     <MESSAGE value="Added AES encryption, program settings, localization, minor design amendments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added AES encryption, program settings, localization, minor design amendments" />
+    <MESSAGE value="Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
   </component>
 </project>
