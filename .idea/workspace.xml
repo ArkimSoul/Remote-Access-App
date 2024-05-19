@@ -9,32 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="UPnP protocol">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Remote_Access_App_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/DefaultMenuBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/AESKeyMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" afterDir="false" />
+    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Added AES encryption, program settings, localization, minor design amendments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/WaifUPnP.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/KeyMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/KeyboardMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/MouseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/MouseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/DefaultMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/DefaultMenuBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/FrameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/FrameMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Additional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715249269025</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added AES encryption, program settings, localization, minor design amendments">
+      <option name="closed" value="true" />
+      <created>1716077583943</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1716077583943</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -209,6 +204,7 @@
     <MESSAGE value="Corrections to classes responsible for transmitting mouse inputs" />
     <MESSAGE value="Corrections and optimization of the client-server" />
     <MESSAGE value="UPnP protocol" />
-    <option name="LAST_COMMIT_MESSAGE" value="UPnP protocol" />
+    <MESSAGE value="Added AES encryption, program settings, localization, minor design amendments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added AES encryption, program settings, localization, minor design amendments" />
   </component>
 </project>

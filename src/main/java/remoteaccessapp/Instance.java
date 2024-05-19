@@ -26,8 +26,6 @@ public class Instance {
 
     public Instance() {
         mainFrame.setVisible(true);
-        settingsFrame.setVisible(true);
-
         updateLanguage();
     }
 

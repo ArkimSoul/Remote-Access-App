@@ -1,9 +1,9 @@
 package remoteaccessapp.utils.enums;
 
 public enum Language {
-    ENGLISH ("English", "en_US"),
-    RUSSIAN ("Russian", "ru_RU"),
-    KAZAKH ("Kazakh", "kk_KZ");
+    ENGLISH ("English - English", "en_US"),
+    RUSSIAN ("Russian - Русский", "ru_RU"),
+    KAZAKH ("Kazakh - Қазақша", "kk_KZ");
 
     private String title;
     private String code;

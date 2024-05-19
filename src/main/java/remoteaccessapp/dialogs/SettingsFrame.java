@@ -9,8 +9,8 @@ import java.awt.*;
 public class SettingsFrame extends JFrame {
     private Instance instance;
     private JPanel contentPane;
-    private JTextField textField2;
-    private JTextField textField1;
+    private JTextField deviceNameTextField;
+    private JTextField serverPortTextField;
     private JCheckBox enableAESEncryptionCheckBox;
     private JCheckBox enableRSAEncryptionCheckBox;
     private JComboBox languageComboBox;
@@ -38,10 +38,18 @@ public class SettingsFrame extends JFrame {
         }
 
         saveButton.addActionListener(e -> saveButton_click());
+
+        deviceNameTextField.setText(instance.settings.getDeviceName());
+        languageComboBox.setSelectedItem(instance.settings.getLanguage());
+        serverPortTextField.setText(Integer.toString(instance.settings.getServerPort()));
+        enableAESEncryptionCheckBox.setSelected(instance.settings.isAESEnabled());
+        enableRSAEncryptionCheckBox.setSelected(instance.settings.isRSAEnabled());
     }
 
     private void saveButton_click() {
+        instance.settings.setDeviceName(deviceNameTextField.getText());
         instance.settings.setLanguage((Language) languageComboBox.getSelectedItem());
+        instance.settings.setServerPort(Integer.parseInt(serverPortTextField.getText()));
         instance.settings.setAESEnabled(enableAESEncryptionCheckBox.isSelected());
         instance.settings.setRSAEnabled(enableRSAEncryptionCheckBox.isSelected());
     }

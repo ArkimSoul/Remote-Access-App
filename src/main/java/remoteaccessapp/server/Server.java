@@ -1,7 +1,6 @@
 package remoteaccessapp.server;
 
 import remoteaccessapp.Instance;
-import remoteaccessapp.RemoteAccessApp;
 import remoteaccessapp.client.messages.KeyboardMessage;
 import remoteaccessapp.client.messages.MouseMessage;
 import remoteaccessapp.server.messages.FrameMessage;
@@ -14,13 +13,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private Instance instance;
+    private final Instance instance;
 
     private AESHelper aesHelper;
 
-    private int port = RemoteAccessApp.PORT;
-
-    private ServerSocket serverSocket;
+    private volatile ServerSocket serverSocket;
     private Socket client_socket;
 
     private ObjectOutputStream out;
@@ -35,7 +32,7 @@ public class Server {
 
         instance.executor.submit(() -> {
             try {
-                serverSocket = new ServerSocket(port);
+                serverSocket = new ServerSocket(instance.settings.getServerPort());
 
                 client_socket = serverSocket.accept();
                 out = new ObjectOutputStream(client_socket.getOutputStream());
@@ -109,7 +106,7 @@ public class Server {
     }
 
     public String getIPAddress() {
-        return client_socket.getInetAddress().getHostAddress();
+        return "localhost";
     }
 
     public void close() {

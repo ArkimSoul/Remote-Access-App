@@ -79,7 +79,7 @@ public class MainFrame extends JFrame {
     private void connectButton_click() {
         if (instance.client == null) {
             try {
-                instance.client = new Client(instance, connectionTextField.getText(), RemoteAccessApp.PORT);
+                instance.client = new Client(instance, connectionTextField.getText(), 4389);
             } catch (Exception e) {
                 instance.client = null;
                 JOptionPane.showMessageDialog(this, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);

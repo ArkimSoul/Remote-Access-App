@@ -3,6 +3,8 @@ package remoteaccessapp.dialogs;
 import remoteaccessapp.Instance;
 
 import javax.swing.*;
+import java.awt.*;
+import java.net.URI;
 
 public class DefaultMenuBar extends JMenuBar {
     private Instance instance;
@@ -25,6 +27,24 @@ public class DefaultMenuBar extends JMenuBar {
         helpMenu.add(aboutMenuItem);
 
         updateLanguage();
+
+        settingsMenuItem.addActionListener(e -> {
+            instance.settingsFrame.setVisible(true);
+        });
+
+        exitMenuItem.addActionListener(e -> {
+            System.exit(0);
+        });
+
+        aboutMenuItem.addActionListener(e -> {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/ArkimSoul/Remote-Access-App/"));
+                } catch (Exception _) {
+
+                }
+            }
+        });
     }
 
     public void updateLanguage() {

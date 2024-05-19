@@ -19,7 +19,7 @@ public class Client {
     private AESHelper aesHelper;
 
     private String serverIP = "localhost";
-    private int port = RemoteAccessApp.PORT;
+    private int port = 4389;
 
     private static Socket socket;
 

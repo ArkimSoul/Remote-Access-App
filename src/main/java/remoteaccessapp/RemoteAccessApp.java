@@ -1,9 +1,8 @@
 package remoteaccessapp;
 
 public class RemoteAccessApp {
-    private static final Instance instance = new Instance();
 
-    public static final int PORT = 4389;
+    private static final Instance instance = new Instance();
 
     public static void main(String[] args) {
 

@@ -6,6 +6,7 @@ import remoteaccessapp.utils.enums.Language;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Properties;
 
 public class Settings {
@@ -39,7 +40,17 @@ public class Settings {
     }
 
     public String getDeviceName() {
-        return properties.getProperty("deviceName", "Remote Access App");
+        if (properties.getProperty("deviceName") == null) {
+            try {
+                return InetAddress.getLocalHost().getHostName();
+            }
+            catch (Exception _) {
+                return "Unkown Device";
+            }
+        }
+        else {
+            return properties.getProperty("deviceName");
+        }
     }
 
     public void setDeviceName(String deviceName) {
@@ -63,16 +74,16 @@ public class Settings {
         instance.updateLanguage();
     }
 
-    public int getPort() {
+    public int getServerPort() {
         return Integer.parseInt(properties.getProperty("port", "4389"));
     }
 
-    public void setPort(int port) {
+    public void setServerPort(int port) {
         properties.setProperty("port", String.valueOf(port));
         saveSettings();
     }
 
-    public boolean getAESEnabled() {
+    public boolean isAESEnabled() {
         return Boolean.parseBoolean(properties.getProperty("aesEnabled", "false"));
     }
 
@@ -81,7 +92,7 @@ public class Settings {
         saveSettings();
     }
 
-    public boolean getRSAEnabled() {
+    public boolean isRSAEnabled() {
         return Boolean.parseBoolean(properties.getProperty("rsaEnabled", "false"));
     }
 
