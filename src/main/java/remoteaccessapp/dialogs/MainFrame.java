@@ -1,12 +1,10 @@
 package remoteaccessapp.dialogs;
 
 import remoteaccessapp.Instance;
-import remoteaccessapp.RemoteAccessApp;
 import remoteaccessapp.client.Client;
 import remoteaccessapp.server.Server;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -57,12 +55,13 @@ public class MainFrame extends JFrame {
         connectButton.addActionListener(e -> connectButton_click());
     }
 
-    private void recieveButton_click() {
+    public void recieveButton_click() {
         if (instance.server == null) {
             instance.server = new Server(instance);
             serverStatusLabel.setText(instance.bundle.getString("mf.status") + ": " + (instance.server == null ? instance.bundle.getString("mf.status.disabled") : instance.bundle.getString("mf.status.ready")));
             serverIPLabel.setText(instance.bundle.getString("mf.your_ip") + ": " + (instance.server == null ? "0.0.0.0" : instance.server.getIPAddress()));
             recieveButton.setText(instance.server == null ? instance.bundle.getString("mf.receive.enable") : instance.bundle.getString("mf.receive.disable"));
+            //connectButton.setEnabled(false);
         }
         else {
             instance.server.close();
@@ -70,6 +69,7 @@ public class MainFrame extends JFrame {
             serverStatusLabel.setText(instance.bundle.getString("mf.status") + ": " + (instance.server == null ? instance.bundle.getString("mf.status.disabled") : instance.bundle.getString("mf.status.ready")));
             serverIPLabel.setText(instance.bundle.getString("mf.your_ip") + ": " + (instance.server == null ? "0.0.0.0" : instance.server.getIPAddress()));
             recieveButton.setText(instance.server == null ? instance.bundle.getString("mf.receive.enable") : instance.bundle.getString("mf.receive.disable"));
+            //connectButton.setEnabled(true);
         }
         recieveButton.setEnabled(false);
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -79,7 +79,7 @@ public class MainFrame extends JFrame {
     private void connectButton_click() {
         if (instance.client == null) {
             try {
-                instance.client = new Client(instance, connectionTextField.getText(), 4389);
+                instance.client = new Client(instance, connectionTextField.getText());
             } catch (Exception e) {
                 instance.client = null;
                 JOptionPane.showMessageDialog(this, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);

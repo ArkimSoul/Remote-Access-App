@@ -9,24 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Bug fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/enums/MouseAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/RSAHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/RSAKeyMessage.java" afterDir="false" />
+    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Added RSA encryption, bug fixes, kazakh localisation, performance improvements">
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/ClientInfoMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/enums/ConnectionStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/ConfirmMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/KeyboardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/KeyboardMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/MouseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/MouseMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/AESKeyMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/AESKeyMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/FrameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/FrameMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Converter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/enums/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/enums/Language.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" afterDir="false" />
@@ -104,25 +100,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RemoteAccessApp.executor": "Run",
-    "Gradle.Remote-Access-App [build].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/IdeaProjects/Remote-Access-App/plugins/WaifUPnP.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RemoteAccessApp.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Remote-Access-App [build].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/IdeaProjects/Remote-Access-App&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\IdeaProjects\Remote-Access-App\plugins" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="RemoteAccessApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="remoteaccessapp.RemoteAccessApp" />
+      <module name="Remote-Access-App" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="remoteaccessapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.RemoteAccessApp" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -197,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716080012436</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added RSA encryption, bug fixes, kazakh localisation, performance improvements">
+      <option name="closed" value="true" />
+      <created>1716153536919</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716153536919</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -222,6 +246,7 @@
     <MESSAGE value="UPnP protocol" />
     <MESSAGE value="Added AES encryption, program settings, localization, minor design amendments" />
     <MESSAGE value="Bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
+    <MESSAGE value="Added RSA encryption, bug fixes, kazakh localisation, performance improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added RSA encryption, bug fixes, kazakh localisation, performance improvements" />
   </component>
 </project>

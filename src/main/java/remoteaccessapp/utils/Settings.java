@@ -8,58 +8,52 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Properties;
+import java.util.prefs.Preferences;
 
 public class Settings {
-    private Instance instance;
+    private final Instance instance;
 
-    private static final String PROPERTIES_FILE_URL = "settings.properties";
-
-    private Properties properties = new Properties();
+    private final Preferences preferences = Preferences.userRoot().node("remoteaccessapp");
 
     public Settings(Instance inst) {
         instance = inst;
-        loadSettings();
     }
 
-    private void loadSettings() {
+    public void restoreDefaults() {
         try {
-            FileInputStream fis = new FileInputStream(PROPERTIES_FILE_URL);
-            properties.load(fis);
-        } catch (IOException e) {
-            saveSettings();
+            preferences.clear();
+            getDeviceName();
+            getLanguage();
+            getServerPort();
+            isAESEnabled();
+            isRSAEnabled();
+            getAESKeyRenewalPeriod();
         }
-    }
+        catch (Exception _) {
 
-    private void saveSettings() {
-        try {
-            FileOutputStream fos = new FileOutputStream(PROPERTIES_FILE_URL);
-            properties.store(fos, null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public String getDeviceName() {
-        if (properties.getProperty("deviceName") == null) {
+        if (preferences.get("deviceName", null) == null) {
             try {
                 return InetAddress.getLocalHost().getHostName();
             }
             catch (Exception _) {
-                return "Unkown Device";
+                return "Unknown Device";
             }
         }
         else {
-            return properties.getProperty("deviceName");
+            return preferences.get("deviceName", null);
         }
     }
 
     public void setDeviceName(String deviceName) {
-        properties.setProperty("deviceName", deviceName);
-        saveSettings();
+        preferences.put("deviceName", deviceName);
     }
 
     public Language getLanguage() {
-        String language = properties.getProperty("language", Language.ENGLISH.getCode());
+        String language = preferences.get("language", Language.ENGLISH.getCode());
         for (Language lang : Language.values()) {
             if (lang.getCode().equals(language)) {
                 return lang;
@@ -69,44 +63,39 @@ public class Settings {
     }
 
     public void setLanguage(Language language) {
-        properties.setProperty("language", language.getCode());
-        saveSettings();
+        preferences.put("language", language.getCode());
         instance.updateLanguage();
     }
 
     public int getServerPort() {
-        return Integer.parseInt(properties.getProperty("port", "4389"));
+        return Integer.parseInt(preferences.get("port", "4389"));
     }
 
     public void setServerPort(int port) {
-        properties.setProperty("port", String.valueOf(port));
-        saveSettings();
+        preferences.put("port", String.valueOf(port));
     }
 
     public boolean isAESEnabled() {
-        return Boolean.parseBoolean(properties.getProperty("aesEnabled", "false"));
+        return Boolean.parseBoolean(preferences.get("aesEnabled", "false"));
     }
 
     public void setAESEnabled(boolean aesEnabled) {
-        properties.setProperty("aesEnabled", String.valueOf(aesEnabled));
-        saveSettings();
+        preferences.put("aesEnabled", String.valueOf(aesEnabled));
     }
 
     public boolean isRSAEnabled() {
-        return Boolean.parseBoolean(properties.getProperty("rsaEnabled", "false"));
+        return Boolean.parseBoolean(preferences.get("rsaEnabled", "false"));
     }
 
     public void setRSAEnabled(boolean rsaEnabled) {
-        properties.setProperty("rsaEnabled", String.valueOf(rsaEnabled));
-        saveSettings();
+        preferences.put("rsaEnabled", String.valueOf(rsaEnabled));
     }
 
     public int getAESKeyRenewalPeriod() {
-        return Integer.parseInt(properties.getProperty("aesKeyRenewalPeriod", "180"));
+        return Integer.parseInt(preferences.get("aesKeyRenewalPeriod", "180"));
     }
 
     public void setAESKeyRenewalPeriod(int i) {
-        properties.setProperty("aesKeyRenewalPeriod", String.valueOf(i));
-        saveSettings();
+        preferences.put("aesKeyRenewalPeriod", String.valueOf(i));
     }
 }

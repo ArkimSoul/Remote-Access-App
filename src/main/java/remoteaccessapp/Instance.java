@@ -8,14 +8,14 @@ import remoteaccessapp.server.Server;
 import remoteaccessapp.utils.Settings;
 
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class Instance {
     public ResourceBundle bundle = ResourceBundle.getBundle("language.en_US");
 
     public Settings settings = new Settings(this);
-    public ExecutorService executor = Executors.newCachedThreadPool();
+    public ScheduledExecutorService executor = Executors.newScheduledThreadPool(6);
 
     public MainFrame mainFrame = new MainFrame(this);
     public ClientFrame clientFrame = new ClientFrame(this);
