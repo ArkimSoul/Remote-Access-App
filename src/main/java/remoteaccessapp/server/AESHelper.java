@@ -1,28 +1,21 @@
 package remoteaccessapp.server;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class AESHelper {
-    private static SecretKey secretKey;
+    private final SecretKey secretKey;
 
-    private static Cipher encrypter;
-    private static Cipher decrypter;
+    private final Cipher encrypter;
+    private final Cipher decrypter;
 
-    private void generateKey() throws NoSuchAlgorithmException {
+    public AESHelper() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(128);
         secretKey = keyGenerator.generateKey();
-    }
-
-    public AESHelper() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        generateKey();
 
         encrypter = Cipher.getInstance("AES");
         encrypter.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -42,9 +35,9 @@ public class AESHelper {
         decrypter.init(Cipher.DECRYPT_MODE, secretKey);
     }
 
-    public byte[] encrypt(byte[] bytes) {
+    public byte[] encrypt(byte[] data) {
         try {
-            return encrypter.doFinal(bytes);
+            return encrypter.doFinal(data);
         }
         catch (Exception _) {
 
@@ -52,14 +45,8 @@ public class AESHelper {
         return null;
     }
 
-    public byte[] decrypt(byte[] bytes) {
-        try {
-            return decrypter.doFinal(bytes);
-        }
-        catch (Exception _) {
-
-        }
-        return null;
+    public byte[] decrypt(byte[] data) throws IllegalBlockSizeException, BadPaddingException {
+        return decrypter.doFinal(data);
     }
 
     public byte[] encodeKey() {

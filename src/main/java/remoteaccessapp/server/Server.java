@@ -89,7 +89,7 @@ public class Server {
                     instance.mainFrame.recieveButton_click();
                 }
 
-                server_lifecycle();
+                serverLifecycle();
             }
             catch (Exception _) {
 
@@ -97,16 +97,16 @@ public class Server {
         });
     }
 
-    private AESKeyMessage updateAESKey(boolean returnRSAEncodedKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+    private AESKeyMessage updateAESKey(boolean encryptWithRSA) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         aesHelper = new AESHelper();
-        if (returnRSAEncodedKey) {
+        if (encryptWithRSA) {
             byte[] key = aesHelper.encodeKey();
             return new AESKeyMessage(rsaHelper.encrypt(key));
         }
         return new AESKeyMessage(aesHelper.encodeKey());
     }
 
-    private void server_lifecycle() {
+    private void serverLifecycle() {
         if (aesKeyRenewalPeriod > 0) {
             instance.executor.scheduleAtFixedRate(() -> {
                 try {
@@ -114,7 +114,6 @@ public class Server {
                     out.flush();
                 }
                 catch (Exception _) {
-
                 }
             }, aesKeyRenewalPeriod, aesKeyRenewalPeriod, TimeUnit.SECONDS);
         }

@@ -116,7 +116,7 @@ public class ClientFrame extends JFrame {
     private final KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
-            instance.client.sendKeyMessage(new KeyboardMessage(e.getKeyCode(), e.getID() == KeyEvent.KEY_PRESSED));
+            instance.client.sendKeyboardMessage(new KeyboardMessage(e.getKeyCode(), e.getID() == KeyEvent.KEY_PRESSED));
             return false;
         }
     };
@@ -124,7 +124,7 @@ public class ClientFrame extends JFrame {
     public void setConnectionStatus(ConnectionStatus cs) {
         boolean update = true;
         if (connectionStatus == ConnectionStatus.AES_KEY_UPDATING) {
-            if (statusTick < 500000) {
+            if (statusTick < 99999999) {
                 update = false;
                 statusTick++;
             }

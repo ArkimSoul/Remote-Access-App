@@ -9,23 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Added RSA encryption, bug fixes, kazakh localisation, performance improvements">
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/messages/ClientInfoMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/enums/ConnectionStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/messages/ConfirmMessage.java" afterDir="false" />
+    <list default="true" id="9299ac62-f261-4b5a-bdc5-5ae6441498fd" name="Changes" comment="Connection confirmation from the server side.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/Instance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/RemoteAccessApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/ClientFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/dialogs/SettingsFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/AESHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/RSAHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/RSAHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/remoteaccessapp/utils/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/en_US.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/kk_KZ.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/ru_RU.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +68,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -88,7 +79,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ArkimSoul/Remote-Access-App.git&quot;,
-    &quot;accountId&quot;: &quot;1835ef72-ff58-4069-bed4-d025202a7d73&quot;
+    &quot;accountId&quot;: &quot;b418250e-a9c5-4582-a27d-404c136006ce&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -112,7 +103,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -221,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716153536919</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Connection confirmation from the server side.">
+      <option name="closed" value="true" />
+      <created>1717026080087</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1717026080087</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -247,6 +246,7 @@
     <MESSAGE value="Added AES encryption, program settings, localization, minor design amendments" />
     <MESSAGE value="Bug fixes" />
     <MESSAGE value="Added RSA encryption, bug fixes, kazakh localisation, performance improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added RSA encryption, bug fixes, kazakh localisation, performance improvements" />
+    <MESSAGE value="Connection confirmation from the server side." />
+    <option name="LAST_COMMIT_MESSAGE" value="Connection confirmation from the server side." />
   </component>
 </project>

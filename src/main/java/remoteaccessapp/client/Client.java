@@ -13,11 +13,16 @@ import remoteaccessapp.server.messages.AESKeyMessage;
 import remoteaccessapp.server.messages.RSAKeyMessage;
 import remoteaccessapp.utils.Converter;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -81,10 +86,10 @@ public class Client {
                 ConfirmMessage confirmMessage = (ConfirmMessage) in.readObject();
 
                 if (!confirmMessage.confirm()) {
-                    closeCycle();
+                    close();
                 }
 
-                client_lifecycle();
+                clientLifecycle();
             }
             catch (Exception _) {
 
@@ -92,24 +97,32 @@ public class Client {
         });
     }
 
-    private void client_lifecycle() {
+    private void clientLifecycle() {
         instance.executor.submit(() -> {
-            try {
-                while (isCycleEnabled) {
-                    lastRequest = Instant.now();
-                    Object object = in.readObject();
-                    if (object instanceof FrameMessage frameMessage) {
-                        byte[] message = (isAESEnabled ? aesHelper.decrypt(frameMessage.image()) : frameMessage.image());
+            while (isCycleEnabled) {
+                lastRequest = Instant.now();
+                Object object = null;
+                try {
+                    object = in.readObject();
+                } catch (Exception _) {
+                }
+                if (object instanceof FrameMessage frameMessage) {
+                    byte[] message = null;
+                    try {
+                        message = (isAESEnabled ? aesHelper.decrypt(frameMessage.image()) : frameMessage.image());
                         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(message);
                         frameBuffer = ImageIO.read(byteArrayInputStream);
-                    }
-                    else if (object instanceof AESKeyMessage aesKeyMessage) {
-                        instance.clientFrame.setConnectionStatus(ConnectionStatus.AES_KEY_UPDATING);
-                        aesHelper = new AESHelper(isRSAEnabled ? Converter.bytesToString(rsaHelper.decrypt(aesKeyMessage.key())) : Converter.bytesToString(aesKeyMessage.key()));
+                    } catch (Exception _) {
                     }
                 }
-            } catch (Exception _) {
-
+                else if (object instanceof AESKeyMessage aesKeyMessage) {
+                    instance.clientFrame.setConnectionStatus(ConnectionStatus.AES_KEY_UPDATING);
+                    String key = (isRSAEnabled ? Converter.bytesToString(rsaHelper.decrypt(aesKeyMessage.key())) : Converter.bytesToString(aesKeyMessage.key()));
+                    try {
+                        aesHelper = new AESHelper(key);
+                    } catch (Exception _) {
+                    }
+                }
             }
         });
         instance.executor.submit(() -> {
@@ -125,7 +138,7 @@ public class Client {
                         if (result == JOptionPane.YES_OPTION) {
                             lastRequest = Instant.now();
                         } else {
-                            closeCycle();
+                            close();
                         }
                     }
                 }
@@ -133,7 +146,7 @@ public class Client {
         });
     }
 
-    private void closeCycle() {
+    private void close() {
         try {
             socket.close();
         } catch (IOException e) {
@@ -153,7 +166,7 @@ public class Client {
         }
     }
 
-    public void sendKeyMessage(KeyboardMessage keyboardMessage) {
+    public void sendKeyboardMessage(KeyboardMessage keyboardMessage) {
         try {
             out.writeObject(keyboardMessage);
         } catch (IOException _) {

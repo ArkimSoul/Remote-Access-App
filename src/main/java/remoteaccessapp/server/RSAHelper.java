@@ -9,23 +9,19 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class RSAHelper {
-    private static PublicKey publicKey;
-    private static PrivateKey privateKey;
+    private final PublicKey publicKey;
+    private final PrivateKey privateKey;
 
-    private static Cipher encrypter;
-    private static Cipher decrypter;
+    private final Cipher encrypter;
+    private final Cipher decrypter;
 
-    private void generateKey() throws NoSuchAlgorithmException {
+    public RSAHelper() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(2048);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
         publicKey = keyPair.getPublic();
         privateKey = keyPair.getPrivate();
-    }
-
-    public RSAHelper() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        generateKey();
 
         encrypter = Cipher.getInstance("RSA");
         encrypter.init(Cipher.ENCRYPT_MODE, publicKey);
@@ -48,9 +44,9 @@ public class RSAHelper {
         decrypter.init(Cipher.DECRYPT_MODE, privateKey);
     }
 
-    public byte[] encrypt(byte[] bytes) {
+    public byte[] encrypt(byte[] data) {
         try {
-            return encrypter.doFinal(bytes);
+            return encrypter.doFinal(data);
         }
         catch (Exception _) {
 
@@ -58,9 +54,9 @@ public class RSAHelper {
         return null;
     }
 
-    public byte[] decrypt(byte[] bytes) {
+    public byte[] decrypt(byte[] data) {
         try {
-            return decrypter.doFinal(bytes);
+            return decrypter.doFinal(data);
         }
         catch (Exception _) {
 
